@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2b76158b0939164cb55d684e7b40b94, type: 3}
+  m_Name: TutorialTexts
+  m_EditorClassIdentifier: 
+  <TutorialTextElement>k__BackingField:
+  - <Type>k__BackingField: 0
+    <GeneralText>k__BackingField: "Arrastar Objetos\nVoc\xEA pode arrastar objetos."
+    <KeyboardText>k__BackingField: "Segure a barra de espa\xE7o enquanto se movimenta
+      utilizando as setas ou WASD."
+    <JoystickText>k__BackingField: Segure a A enquanto se movimenta utilizando o
+      direcional.
+  - <Type>k__BackingField: 1
+    <GeneralText>k__BackingField: "Impulso\nVoc\xEA pode utilizar o impulso para
+      se mover rapidamente para frente. Ao se impulsinar, voc\xEA ficar\xE1 invenc\xEDvel
+      por um momento. Utilize essa manobra para escapar de armadilhas e ataques inimigos."
+    <KeyboardText>k__BackingField: Shift esquerdo.
+    <JoystickText>k__BackingField: RT
+  - <Type>k__BackingField: 2
+    <GeneralText>k__BackingField: 'Ataque
+
+      Utilize sua espada para se defender
+      dos inimigos.'
+    <KeyboardText>k__BackingField: "Bot\xE3o esquerdo do mouse"
+    <JoystickText>k__BackingField: X
