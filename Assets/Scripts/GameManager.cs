@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GEngine.Manager;
 using UnityEngine;
@@ -29,10 +30,15 @@ public class PlayerData
 
     public void Init()
     {
-        CurrentHp = MaxHp;
+        FullRecoverHP();
     }
 
     internal void CompleteTutorial(TutorialType type) => TutorialsCompleted.Add(type);
+
+    internal void FullRecoverHP()
+    {
+        CurrentHp = MaxHp;
+    }
 
     internal bool PlayerSawTutorial(TutorialType type) => TutorialsCompleted.Contains(type);
 }

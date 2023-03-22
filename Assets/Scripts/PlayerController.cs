@@ -8,9 +8,9 @@ public class PlayerController : BaseCharacterController
     private InputManager InputManager { get; set; }
     private PlayerStateMachineManager StateMachineManager { get; set; }
 
-    public void Init(InputManager inputManager, Vector3 spawnPosition, Vector2 spawnDirection, PlayerData playerData)
+    public void Init(GameplayScene gameplayScene, InputManager inputManager, Vector3 spawnPosition, Vector2 spawnDirection, PlayerData playerData)
     {
-        PlayerCharacter.Init(this, spawnDirection, playerData);
+        PlayerCharacter.Init(this, gameplayScene, spawnDirection, playerData);
         AI.Init(PlayerCharacter);
         InputManager = inputManager;
         ConfigStateMachine();
@@ -64,6 +64,9 @@ public class PlayerController : BaseCharacterController
     private void Update() => StateMachineManager?.Update();
     public override void TakeDamage(int power, Vector2 impactPoint, float knockbackPower) 
         => StateMachineManager?.OnDamageTaken(power, impactPoint, knockbackPower);
+
+    public void Heal(int healAmount) 
+        => StateMachineManager?.Heal(healAmount);
 
 
     private void OnDestroy()

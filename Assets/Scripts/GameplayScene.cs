@@ -11,6 +11,8 @@ public class GameplayScene : GameScene<SceneData>
     [field: SerializeField] private GameEvent InitEvent { get; set; }
     [field: SerializeField] private SpawnPoint[] SpawnPoints { get; set; }
     private DemoTutorial DemoTutorial { get; set; }
+    private GameOverCanvas _gameOverCanvas;
+    private EndGameCanvas _endGameCanvas;
     private new GameplaySceneData SceneData => (GameplaySceneData)base.SceneData;
     private new GameManager GameManager => (GameManager)base.GameManager;
     private InputManager InputManager => GameManager.InputManager;
@@ -35,6 +37,30 @@ public class GameplayScene : GameScene<SceneData>
         InitScenePoints();
         InitTeleports();
         InitTutorial();
+        InitGameOverCanvas();
+        InitEndGameCanvas();
+        InitEventAreas();
+        if (InitEvent)
+            ExecuteEvent(InitEvent);
+    }
+
+    private void InitEventAreas()
+    {
+        var areas = FindObjectsOfType<EventArea>();
+        foreach (var item in areas)
+            item.Init(Player.gameObject);
+    }
+
+    private void InitGameOverCanvas()
+    {
+        _gameOverCanvas = FindObjectOfType<GameOverCanvas>();
+        _gameOverCanvas.Init(this);
+    }
+
+    private void InitEndGameCanvas()
+    {
+        _endGameCanvas = FindObjectOfType<EndGameCanvas>();
+        _endGameCanvas?.Init(this);
     }
 
     private void InitTutorial()
@@ -49,8 +75,6 @@ public class GameplayScene : GameScene<SceneData>
     protected override void OnSceneLoaded()
     {
         InitStateMachine();
-        if (InitEvent)
-            ExecuteEvent(InitEvent);
     }
 
     private void RegisterInputs()
@@ -67,7 +91,7 @@ public class GameplayScene : GameScene<SceneData>
     {
         Player = FindObjectOfType<PlayerController>();
         var spawnPoint = GetSpawnPoint();
-        Player.Init(InputManager, spawnPoint.Position.position, spawnPoint.Direction, GameManager.PlayerData);
+        Player.Init(this, InputManager, spawnPoint.Position.position, spawnPoint.Direction, GameManager.PlayerData);
         _charactersAI.Add("Player", Player.AI);
 
     }
@@ -131,9 +155,18 @@ public class GameplayScene : GameScene<SceneData>
 
     private IEnumerator _ExecuteEvent(GameEvent gameEvent)
     {
-        DisableGameplay();
+        if (gameEvent.StopGameplay)
+            DisableGameplay();
         yield return gameEvent.Execute();
-        EnableGameplay();
+
+        if (gameEvent.StopGameplay)
+            EnableGameplay();
+    }
+
+    public void EndGame()
+    {
+        DisableGameplay();
+        GameManager.ScreenFader.FadeOut(1, () => _endGameCanvas.Show());
     }
 
     public CharacterAI GetCharacterAI(string id) => _charactersAI[id];
@@ -141,8 +174,8 @@ public class GameplayScene : GameScene<SceneData>
     private void PausePressed() => StateMachine?.OnPausePressed();
     public void OpenPauseMenu() => PauseMenu.SetActive(true);
     public void ClosePauseMenu() => PauseMenu.SetActive(false);
-    public void DisableGameplay() => StateMachine.SwapState(new GameplayStandByState(StateMachine, this));
-    public void EnableGameplay() => StateMachine.SwapState(new GameplayDefaultState(StateMachine, this));
+    public void DisableGameplay() => StateMachine?.SwapState(new GameplayStandByState(StateMachine, this));
+    public void EnableGameplay() => StateMachine?.SwapState(new GameplayDefaultState(StateMachine, this));
 
     public new void LoadScene(SceneData sceneData, float fadeOutTime = .5f)
     {
@@ -152,6 +185,17 @@ public class GameplayScene : GameScene<SceneData>
     private void OnDestroy()
     {
         UnregisterInputs();
+    }
+
+    internal void Retry()
+    {
+        GameManager.Instance.PlayerData.FullRecoverHP();
+        base.LoadScene(new SceneData(gameObject.scene.name));
+    }
+
+    internal void ShowGameOverCanvas()
+    {
+        _gameOverCanvas.Show();
     }
 }
 

@@ -17,8 +17,8 @@ MonoBehaviour:
     <GeneralText>k__BackingField: "Arrastar Objetos\nVoc\xEA pode arrastar objetos."
     <KeyboardText>k__BackingField: "Segure a barra de espa\xE7o enquanto se movimenta
       utilizando as setas ou WASD."
-    <JoystickText>k__BackingField: Segure a A enquanto se movimenta utilizando o
-      direcional.
+    <JoystickText>k__BackingField: "Segure o bot\xE3o A enquanto se movimenta utilizando
+      o direcional."
   - <Type>k__BackingField: 1
     <GeneralText>k__BackingField: "Impulso\nVoc\xEA pode utilizar o impulso para
       se mover rapidamente para frente. Ao se impulsinar, voc\xEA ficar\xE1 invenc\xEDvel

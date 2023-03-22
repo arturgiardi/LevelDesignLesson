@@ -42,7 +42,7 @@ public class Door : MonoBehaviour
         StopDoorAnimationCoroutine();
         IsOpen = false;
         Collider.enabled = true;
-        AnimationCoroutine = StartCoroutine(AnimateDoor(AnimationTime, _openAnimation));
+        AnimationCoroutine = StartCoroutine(AnimateDoor(AnimationTime, _closeAnimation));
     }
 
     private IEnumerator AnimateDoor(float animationTime, Sprite[] animation, Action callback = null)

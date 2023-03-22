@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300210, guid: 872dba149c5addb49ac3649c5b9247d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bf4692465ed5dc4abfc3730f2d79942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ShotCooldown>k__BackingField: 0.25
+  <ShotCooldown>k__BackingField: 0.2
   <BulletSpawnPoint>k__BackingField: {fileID: 2581678650956450630}
   <Bullet>k__BackingField: {fileID: 4644649538330608490, guid: f50ce6c446bf68747bc2598469b93191, type: 3}
 --- !u!1 &8159083200402824736

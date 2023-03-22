@@ -39,13 +39,13 @@ public class Room4Event1 : GameEvent
     private IEnumerator SpawnBridge()
     {
         var duration = 2f;
-        var elapsedTime = 0f;
+        var elapsedTime = duration;
 
-        while (elapsedTime < duration)
+        while (elapsedTime > 0)
         {
             var alpha = elapsedTime / duration;
             Abyss.color = new Color(Abyss.color.r, Abyss.color.g, Abyss.color.b, alpha);
-            elapsedTime += Time.deltaTime;
+            elapsedTime -= Time.deltaTime;
             yield return null;
         }
         Abyss.gameObject.SetActive(false);

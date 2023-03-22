@@ -19,12 +19,15 @@ public abstract class PlayerBaseState : BaseState
     public virtual void EndInteraction() { }
     public virtual void OnDamageTaken(int power, Vector3 impactPoint, float knockbackPower) { }
     public virtual void Dispause() {}
+    public virtual void Heal(int healAmount) {}
 
     protected void TakeDamage(int power, Vector3 impactPoint, float knockbackPower)
     {
         if (!Player.IsInvencible)
             Manager.PushState(new PlayerDamageState(Player, Manager, power, impactPoint, knockbackPower));
     }
+
+    
 }
 
 public class PlayerInitState : PlayerBaseState
@@ -74,6 +77,11 @@ public class PlayerIdleState : PlayerBaseState
     public override void OnDamageTaken(int power, Vector3 impactPoint, float knockbackPower)
     {
         TakeDamage(power, impactPoint, knockbackPower);
+    }
+
+    public override void Heal(int healAmount) 
+    {
+        Player.Heal(healAmount);
     }
 }
 

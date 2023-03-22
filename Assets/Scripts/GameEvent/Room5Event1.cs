@@ -1,12 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-public class Room5Event1 : GameEvent
+public class Room5Event1 : MonoBehaviour
 {
     [SerializeField] private Turret[] _turrets;
     [field: SerializeField] private HoldButton Button { get; set; }
 
-    public override IEnumerator Execute()
+    public void Execute()
     {
         foreach (var item in _turrets)
         {
@@ -21,6 +21,5 @@ public class Room5Event1 : GameEvent
                 item.TurnOn();
             }
         }
-        yield break;
     }
 }

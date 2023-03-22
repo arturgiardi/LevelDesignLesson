@@ -8,7 +8,7 @@ public class Room6Event0 : GameEvent
     [field: SerializeField] private Door Door { get; set; }
     public override IEnumerator Execute()
     {
-        if (GameManager.Instance.PlayerData.Room5PuzzleSolved)
+        if (GameManager.Instance.PlayerData.Room6PuzzleSolved)
         {
             Door.InstantOpen();
 

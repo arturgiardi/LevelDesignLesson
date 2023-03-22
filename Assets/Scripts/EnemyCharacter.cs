@@ -5,6 +5,7 @@ public class EnemyCharacter : BaseCharacter
 {
     [field: SerializeField] private EnemySightController SightController { get; set; }
     [field: SerializeField] private ContactDamage ContactDamage { get; set; }
+    [field: SerializeField] private HealItem HealItem { get; set; }
     public override bool SawPlayer() => SightController.SawPlayer();
 
     public void Init(BaseCharacterController controller, GameObject player)
@@ -25,6 +26,9 @@ public class EnemyCharacter : BaseCharacter
     protected override void OnDeath()
     {
         Debug.Log("Morte");
+        if(Random.Range(1f, 20f) >= 15)
+            GameObject.Instantiate(HealItem, BodyCenter, Quaternion.identity);
+
         Controller.Destroy();
     }
 

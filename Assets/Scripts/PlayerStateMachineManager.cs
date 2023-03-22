@@ -16,4 +16,5 @@ public class PlayerStateMachineManager : BaseStateMachineManager<PlayerBaseState
         => CurrentState?.OnDamageTaken(power, impactPoint, knockbackPower);
 
     public void DisPause() => CurrentState?.Dispause();
+    public void Heal(int healAmount) => CurrentState?.Heal(healAmount);
 }

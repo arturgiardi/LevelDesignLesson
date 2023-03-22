@@ -9,9 +9,11 @@ public class PlayerCharacter : BaseCharacter
     [field: SerializeField] private float DodgeSpeed { get; set; }
     [field: SerializeField] private PlayerInteractionController InteractionController { get; set; }
     public int Hp => Health.CurrentHp;
+    private GameplayScene _gameplayScene;
 
-    public void Init(PlayerController playerController, Vector2 spawnDirection, PlayerData playerData)
+    public void Init(PlayerController playerController, GameplayScene gameplayScene, Vector2 spawnDirection, PlayerData playerData)
     {
+        _gameplayScene = gameplayScene;
         Controller = playerController;
         AnimatorController.Init(this, spawnDirection);
         InteractionController.Init(this);
@@ -53,6 +55,7 @@ public class PlayerCharacter : BaseCharacter
     {
         Debug.Log("Death");
         Controller.Destroy();
+        _gameplayScene.ShowGameOverCanvas();
     }
 
     protected override void OnDamageTaken()
@@ -68,4 +71,9 @@ public class PlayerCharacter : BaseCharacter
     }
 
     public override bool SawPlayer() => true;
+
+    internal void Heal(int healAmount)
+    {
+        Health.AddHP(healAmount);
+    }
 }
